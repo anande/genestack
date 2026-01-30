@@ -127,11 +127,11 @@ The official Ceilometer documentation lists meters for Nova, Cinder, Glance, Swi
 
 ### What This Means for Billing
 
-To implement billing for Freezer, you have **three options**:
+To implement billing for Freezer, we have **three options**:
 
 #### Option 1: Custom Meter Definitions (Recommended)
 
-You must create custom Ceilometer meter definitions that consume Freezer notifications. This requires:
+we must create custom Ceilometer meter definitions that consume Freezer notifications. This requires:
 
 1. **Freezer must emit notifications** to RabbitMQ (this needs to be verified/implemented in Freezer code)
 2. **Custom meter definitions** in `/etc/ceilometer/meters.d/` to parse Freezer notifications
@@ -228,7 +228,7 @@ Since Freezer doesn't have native Ceilometer integration, here's how to implemen
 
 ### Step 1: Verify Freezer Notification Capability
 
-First, check if Freezer emits notifications to RabbitMQ. You may need to:
+First, check if Freezer emits notifications to RabbitMQ. we may need to:
 
 1. Check Freezer configuration for notification settings
 2. Enable notification drivers in `/etc/freezer/freezer-api.conf`:
@@ -525,7 +525,7 @@ If Freezer uses Cinder for backup storage:
 
 ### Requires Development
 
-To get Freezer-specific metrics, you need to:
+To get Freezer-specific metrics, we need to:
 1. Add notification emitters to Freezer code
 2. Create custom Ceilometer meter definitions
 3. OR create custom pollsters that query Freezer API
@@ -577,10 +577,10 @@ To get Freezer-specific metrics, you need to:
 
 ### Discount Justification for OpenStack-Based Pricing
 
-When running OpenStack Freezer on your own infrastructure, the following discounts are justified:
+When running OpenStack Freezer on wer own infrastructure, the following discounts are justified:
 
 1. **Infrastructure Ownership Discount (30-40%)**: We own and operate the hardware, eliminating cloud provider markup
-2. **No Egress Fees Discount (10-15%)**: No data transfer charges for restores within your datacenter
+2. **No Egress Fees Discount (10-15%)**: No data transfer charges for restores within wer datacenter
 3. **Multi-tenancy Efficiency (15-20%)**: Shared infrastructure across multiple projects/departments
 4. **Long-term Commitment (10-15%)**: Capital investment in infrastructure vs. operational expenses
 5. **No API Call Charges (5-10%)**: Unlimited backup/restore operations without per-request fees
