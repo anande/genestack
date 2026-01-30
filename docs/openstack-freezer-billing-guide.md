@@ -264,7 +264,7 @@ Create `/etc/ceilometer/meters.d/freezer.yaml` with proposed meter definitions:
 
 **IMPORTANT**: The event types (`freezer.backup.create.end`, etc.) and payload fields (`$.payload.backup_size_gb`, etc.) are **hypothetical**. We must verify what Freezer actually emits by inspecting RabbitMQ messages.
 
-### Step 3: Alternative - Direct API Polling
+<!-- ### Step 3: Alternative - Direct API Polling
 
 If Freezer doesn't emit notifications, create a custom pollster:
 
@@ -292,9 +292,9 @@ class BackupSizePollster(pollster.BasePolls):
                 resource_id=backup.get('id'),
                 resource_metadata=backup
             )
-```
+``` -->
 
-### Step 4: Alternative - Use Existing Cinder/Swift Metrics
+### Step 3: Alternative - Use Existing Cinder/Swift Metrics
 
 Since Freezer backs up to Swift or Cinder, we can leverage **existing** Ceilometer metrics:
 
