@@ -127,9 +127,9 @@ The official Ceilometer documentation lists meters for Nova, Cinder, Glance, Swi
 
 ### What This Means for Billing
 
-To implement billing for Freezer, we have **three options**:
+To implement billing for Freezer, we have the following plan :
 
-#### Option 1: Custom Meter Definitions (Recommended)
+#### Create Custom Meter Definitions
 
 we must create custom Ceilometer meter definitions that consume Freezer notifications. This requires:
 
@@ -137,22 +137,6 @@ we must create custom Ceilometer meter definitions that consume Freezer notifica
 2. **Custom meter definitions** in `/etc/ceilometer/meters.d/` to parse Freezer notifications
 3. **Custom event definitions** in `/etc/ceilometer/event_definitions.yaml`
 4. **Custom Gnocchi resource types** for backup resources
-
-#### Option 2: Direct API Polling
-
-Create custom Ceilometer pollsters that query the Freezer API directly:
-
-- Poll Freezer API for backup job status
-- Calculate storage consumption from backup metadata
-- Track restore operations via API logs
-
-#### Option 3: External Metering System
-
-Use an external system (Prometheus, custom scripts) to:
-
-- Query Freezer API periodically
-- Export metrics to CloudKitty directly
-- Bypass Ceilometer entirely
 
 ---
 
