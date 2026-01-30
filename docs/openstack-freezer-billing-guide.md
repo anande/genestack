@@ -156,7 +156,7 @@ Use an external system (Prometheus, custom scripts) to:
 
 ---
 
-### Proposed Custom Metrics for Freezer (Requires Implementation)
+<!-- ### Proposed Custom Metrics for Freezer (Requires Implementation)
 
 Below are **proposed** metrics that would need to be implemented via custom Ceilometer configuration. These are NOT currently available out-of-the-box:
 
@@ -208,7 +208,7 @@ Below are **proposed** metrics that would need to be implemented via custom Ceil
 | `backup.compression.ratio` | Gauge | Ratio | Compression efficiency | None - Optimization metric |
 | `backup.throughput` | Gauge | MB/s | Backup/restore throughput | None - Performance tracking | -->
 
-#### 5. **API and HTTP Metrics**
+<!-- #### 5. **API and HTTP Metrics**
 
 | Metric Name | Type | Unit | Description | Billing Impact |
 |-------------|------|------|-------------|----------------|
@@ -218,9 +218,9 @@ Below are **proposed** metrics that would need to be implemented via custom Ceil
 | `backup.api.put` | Delta | Count | HTTP PUT requests | Low - Update operations |
 | `backup.api.delete` | Delta | Count | HTTP DELETE requests | Low - Delete operations |
 | `backup.api.response_time` | Gauge | Milliseconds | API response time | None - Performance monitoring |
-| `backup.api.errors` | Delta | Count | API error count | None - Health monitoring |
+| `backup.api.errors` | Delta | Count | API error count | None - Health monitoring | -->
 
----
+
 
 ## Implementation Guide: Adding Freezer Metrics to Ceilometer
 
@@ -278,7 +278,7 @@ Create `/etc/ceilometer/meters.d/freezer.yaml` with proposed meter definitions:
   resource_id: $.payload.backup_id
 ```
 
-**IMPORTANT**: The event types (`freezer.backup.create.end`, etc.) and payload fields (`$.payload.backup_size_gb`, etc.) are **hypothetical**. You must verify what Freezer actually emits by inspecting RabbitMQ messages.
+**IMPORTANT**: The event types (`freezer.backup.create.end`, etc.) and payload fields (`$.payload.backup_size_gb`, etc.) are **hypothetical**. We must verify what Freezer actually emits by inspecting RabbitMQ messages.
 
 ### Step 3: Alternative - Direct API Polling
 
@@ -312,7 +312,7 @@ class BackupSizePollster(pollster.BasePolls):
 
 ### Step 4: Alternative - Use Existing Cinder/Swift Metrics
 
-Since Freezer backs up to Swift or Cinder, you can leverage **existing** Ceilometer metrics:
+Since Freezer backs up to Swift or Cinder, we can leverage **existing** Ceilometer metrics:
 
 **For Swift-backed Freezer backups**, use these REAL metrics:
 - `storage.objects.size` - Total size of objects in Swift (includes Freezer backups)
@@ -343,7 +343,7 @@ This approach uses **real, existing Ceilometer metrics** but requires:
 
 ---
 
-## Detailed Metric Collection Examples (PROPOSED)
+<!-- ## Detailed Metric Collection Examples (PROPOSED)
 
 **DISCLAIMER**: The following examples show how metrics COULD be collected IF Freezer had native Ceilometer integration. These are templates for implementation, not existing functionality.
 
@@ -398,9 +398,9 @@ This approach uses **real, existing Ceilometer metrics** but requires:
 
 **What This Would Track**:
 - Amount of data restored in GB
-- Would enable per-restore billing: `Cost = GB restored × $0.004/GB`
+- Would enable per-restore billing: `Cost = GB restored × $0.004/GB` -->
 
-### Example 3: Using REAL Swift Metrics for Freezer Backups
+### Example: Using REAL Swift Metrics for Freezer Backups
 
 ```yaml
 # EXISTING Ceilometer meter (already available)
@@ -472,6 +472,8 @@ Since Freezer stores backups in Swift or Cinder, use the **existing, real** Ceil
 
 ### CloudKitty Configuration (Using Real Metrics)
 
+Need to check AtomHopper/UMS compliant configuration here.
+
 ```yaml
 # CloudKitty rating for Freezer using REAL Swift metrics
 services:
@@ -500,7 +502,7 @@ This configuration uses **real, existing metrics** and works TODAY without custo
 
 ## Summary: What Metrics Are Actually Available?
 
-### ✅ Available NOW (Real Ceilometer Metrics)
+### Available NOW (Real Ceilometer Metrics)
 
 If Freezer uses Swift for backup storage:
 - `storage.objects.size` - Total backup storage
@@ -513,7 +515,7 @@ If Freezer uses Cinder for backup storage:
 - `volume.size` - Backup volume size
 - `snapshot.size` - Backup snapshot size
 
-### ❌ NOT Available (Requires Custom Implementation)
+### NOT Available (Requires Custom Implementation)
 
 - `backup.size` - Freezer-specific backup size tracking
 - `backup.restore.count` - Number of restore operations
@@ -521,7 +523,7 @@ If Freezer uses Cinder for backup storage:
 - `backup.api.requests` - Freezer API usage
 - Any Freezer-specific metrics
 
-### 🔧 Requires Development
+### Requires Development
 
 To get Freezer-specific metrics, you need to:
 1. Add notification emitters to Freezer code
